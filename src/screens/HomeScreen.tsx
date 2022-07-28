@@ -12,7 +12,7 @@ const {width: windowWidth} = Dimensions.get('window');
 const HALF_PAGE = windowWidth / 2;
 
 export const HomeScreen = () => {
-  const {moviesInCinema, isLoading} = useMovies();
+  const {nowPlaying, popular, topRated, upComing, isLoading} = useMovies();
   const {top} = useSafeAreaInsets();
 
   if (isLoading) {
@@ -46,13 +46,15 @@ export const HomeScreen = () => {
               parallaxScrollingOffset: 0,
               parallaxAdjacentItemScale: 0.75,
             }}
-            data={moviesInCinema}
+            data={nowPlaying}
             renderItem={({item}) => <MoviePoster movie={item} />}
           />
         </View>
 
         {/* POPULAR MOVIES */}
-        <HorizontalSlider movies={moviesInCinema} title="Populares" />
+        <HorizontalSlider movies={popular} title="Populares" />
+        <HorizontalSlider movies={topRated} title="Top Rated" />
+        <HorizontalSlider movies={upComing} title="Próximos Estrenos" />
       </View>
     </ScrollView>
   );
