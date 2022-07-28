@@ -1,16 +1,18 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
 
 interface Props {
   movie: Movie;
+  height?: number;
+  width?: number;
 }
 
-export const MoviePoster = ({movie}: Props) => {
+export const MoviePoster = ({movie, width = 200, height = 400}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
   return (
-    // eslint-disable-next-line react-native/no-inline-styles
-    <View style={{width: 200, height: 400}}>
+    <View style={{width, height, marginHorizontal: 5}}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
       </View>
