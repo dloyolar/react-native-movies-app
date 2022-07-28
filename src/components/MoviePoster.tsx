@@ -1,7 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParams} from '../navigation/Navigation';
 
 interface Props {
   movie: Movie;
@@ -9,14 +12,25 @@ interface Props {
   width?: number;
 }
 
+type DetailScreenNavigationProp = StackNavigationProp<
+  RootStackParams,
+  'DetailScreen'
+>;
+
 export const MoviePoster = ({movie, width = 200, height = 400}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+
+  const navigation = useNavigation<DetailScreenNavigationProp>();
+
   return (
-    <View style={{width, height, marginHorizontal: 5}}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DetailScreen', movie)}
+      activeOpacity={0.8}
+      style={{width, height, marginHorizontal: 5}}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
