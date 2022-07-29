@@ -4,7 +4,8 @@ Movies APP in React Native for IOS and Android using the Movies API from https:/
 
 ## Demo
 
-![image](./simulator.png)
+![image](./simulator.png)1
+![image](./simulator2.png)1
 
 ## Installation
 
