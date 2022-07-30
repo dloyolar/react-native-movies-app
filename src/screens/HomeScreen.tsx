@@ -7,6 +7,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
 import {HorizontalSlider} from '../components/HorizontalSlider';
+import {GradientBackground} from '../components/GradientBackground';
 
 const {width: windowWidth} = Dimensions.get('window');
 const HALF_PAGE = windowWidth / 2;
@@ -25,37 +26,39 @@ export const HomeScreen = () => {
   }
 
   return (
-    <ScrollView>
-      <View style={{marginTop: top}}>
-        <View>
-          <Carousel
-            mode="parallax"
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-              width: windowWidth,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            pagingEnabled={false}
-            windowSize={2}
-            snapEnabled
-            height={420}
-            width={HALF_PAGE}
-            modeConfig={{
-              parallaxScrollingScale: 0.9,
-              parallaxScrollingOffset: 0,
-              parallaxAdjacentItemScale: 0.75,
-            }}
-            data={nowPlaying}
-            renderItem={({item}) => <MoviePoster movie={item} />}
-          />
-        </View>
+    <GradientBackground>
+      <ScrollView>
+        <View style={{marginTop: top}}>
+          <View>
+            <Carousel
+              mode="parallax"
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{
+                width: windowWidth,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              pagingEnabled={false}
+              windowSize={2}
+              snapEnabled
+              height={420}
+              width={HALF_PAGE}
+              modeConfig={{
+                parallaxScrollingScale: 0.9,
+                parallaxScrollingOffset: 0,
+                parallaxAdjacentItemScale: 0.75,
+              }}
+              data={nowPlaying}
+              renderItem={({item}) => <MoviePoster movie={item} />}
+            />
+          </View>
 
-        {/* POPULAR MOVIES */}
-        <HorizontalSlider movies={popular} title="Populares" />
-        <HorizontalSlider movies={topRated} title="Top Rated" />
-        <HorizontalSlider movies={upComing} title="Próximos Estrenos" />
-      </View>
-    </ScrollView>
+          {/* POPULAR MOVIES */}
+          <HorizontalSlider movies={popular} title="Populares" />
+          <HorizontalSlider movies={topRated} title="Top Rated" />
+          <HorizontalSlider movies={upComing} title="Próximos Estrenos" />
+        </View>
+      </ScrollView>
+    </GradientBackground>
   );
 };
