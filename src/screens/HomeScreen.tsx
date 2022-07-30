@@ -8,6 +8,7 @@ import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
 import {HorizontalSlider} from '../components/HorizontalSlider';
 import {GradientBackground} from '../components/GradientBackground';
+import {getImageColors} from '../helpers/getColors';
 
 const {width: windowWidth} = Dimensions.get('window');
 const HALF_PAGE = windowWidth / 2;
@@ -15,6 +16,14 @@ const HALF_PAGE = windowWidth / 2;
 export const HomeScreen = () => {
   const {nowPlaying, popular, topRated, upComing, isLoading} = useMovies();
   const {top} = useSafeAreaInsets();
+
+  const getPosterColors = async (index: number) => {
+    const movie = nowPlaying[index];
+    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    const [primary, secondary] = await getImageColors(uri);
+    console.log({primary, secondary});
+  };
 
   if (isLoading) {
     return (
@@ -50,6 +59,7 @@ export const HomeScreen = () => {
               }}
               data={nowPlaying}
               renderItem={({item}) => <MoviePoster movie={item} />}
+              onSnapToItem={index => getPosterColors(index)}
             />
           </View>
 
